@@ -22,7 +22,6 @@ $(document).ready(function() {
     });
 
 
-
     function appendDom(empInfo) {
       $('#container').append('<div class="person"></div>');
       var $el = $('#container').children().last();
@@ -33,11 +32,16 @@ $(document).ready(function() {
       '<button class="employeeDestroy"> Remove Button </button>');
 
       $('#salaryTotal').text(salaryTotal);
+
+      $('.person').last().data('salary', empInfo.employeeSalary);
     }
+
     $('#container').on('click', '.employeeDestroy', function(){
       console.log('this ran');
+      console.log($(this).parent().data('salary'));
+      salaryTotal -= $(this).parent().data('salary');
       $(this).parent().remove();
-
+      $('#salaryTotal').text(salaryTotal);
     })
 
 
