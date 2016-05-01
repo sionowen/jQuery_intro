@@ -5,22 +5,18 @@ $(document).ready(function() {
     $('#employeeinfo').on('submit', function(event) {
       event.preventDefault();
 
-
       $.each($('#employeeinfo').serializeArray(), function(i, field) {
         values[field.name] = field.value;
       })
-
 
       // clear out inputs
       $('#employeeinfo').find('input[type=text]').val('');
 
       // add to list
-      console.log(values);
       salaryTotal += Number(values.employeeSalary);
       // append to DOM
       appendDom(values);
     });
-
 
     function appendDom(empInfo) {
       $('#container').append('<div class="person"></div>');
@@ -37,12 +33,8 @@ $(document).ready(function() {
     }
 
     $('#container').on('click', '.employeeDestroy', function(){
-      console.log('this ran');
-      console.log($(this).parent().data('salary'));
       salaryTotal -= $(this).parent().data('salary');
       $(this).parent().remove();
       $('#salaryTotal').text(salaryTotal);
     })
-
-
 });
