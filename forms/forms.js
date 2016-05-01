@@ -1,31 +1,44 @@
 $(document).ready(function() {
-    var array = [];
+  var values = {};
+  var salaryArray = [];
+  var salaryTotal = 0;
     $('#employeeinfo').on('submit', function(event) {
       event.preventDefault();
 
-      var values = {};
+
       $.each($('#employeeinfo').serializeArray(), function(i, field) {
         values[field.name] = field.value;
       })
 
-      console.log(values);
 
       // clear out inputs
       $('#employeeinfo').find('input[type=text]').val('');
 
       // add to list
-      array.push(values);
-
+      console.log(values);
+      salaryTotal += Number(values.employeeSalary);
       // append to DOM
       appendDom(values);
     });
+
+
 
     function appendDom(empInfo) {
       $('#container').append('<div class="person"></div>');
       var $el = $('#container').children().last();
 
-      $el.append('<p>' + empInfo.employeefirstname + '</p>');
+      $el.append('<p> Name: ' + empInfo.employeefirstname + ' '
+      + empInfo.employeelastname + '<br>Employee ID: ' + empInfo.employeeID +
+       '<br>Job Title: ' + empInfo.employeeJob + '<br>Employee Salary: '+ empInfo.employeeSalary +'</p>' +
+      '<button class="employeeDestroy"> Remove Button </button>');
+
+      $('#salaryTotal').text(salaryTotal);
     }
+    $('#container').on('click', '.employeeDestroy', function(){
+      console.log('this ran');
+      $(this).parent().remove();
+
+    })
 
 
 });
