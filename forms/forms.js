@@ -13,7 +13,7 @@ $(document).ready(function() {
       $('#employeeinfo').find('input[type=text]').val('');
 
       // add to list
-      salaryTotal += Number(values.employeeSalary);
+      salaryTotal += Number(values.employeeSalary) / 12;
       // append to DOM
       appendDom(values);
     });
@@ -33,7 +33,7 @@ $(document).ready(function() {
     }
 
     $('#container').on('click', '.employeeDestroy', function(){
-      salaryTotal -= $(this).parent().data('salary');
+      salaryTotal -= $(this).parent().data('salary') / 12;
       $(this).parent().remove();
       $('#salaryTotal').text(salaryTotal);
     })
